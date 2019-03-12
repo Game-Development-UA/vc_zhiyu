@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Cloud : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Cloud : MonoBehaviour
         isRain = 0;
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         float horiz = Input.GetAxis("Horizontal") * speed;
@@ -21,13 +22,25 @@ public class Cloud : MonoBehaviour
 
         cloud.velocity = new Vector2(horiz, vert);
 
-        //when it rain
+        // when it rain
         if (Input.GetKey(KeyCode.Space))
         {
             cloud.transform.localScale += new Vector3(-0.1f, -0.1f, 0f);
+            speed += 0.03f;
             isRain = 1;
         }
-        else isRain = 0;
+        else
+        {
+            isRain = 0;
+        }
+
+
+        // check if player dies
+        if (cloud.transform.localScale.x <= 0 || cloud.transform.localScale.x >= 30)
+        {
+            SceneManager.LoadScene("end");
+        }
+
     }
 
     public AudioClip smile;
@@ -38,8 +51,10 @@ public class Cloud : MonoBehaviour
 
         if ( face != null)
         {
-            cloud.transform.localScale += new Vector3(face.changeVol*3, face.changeVol*3,0f);
+            cloud.transform.localScale += new Vector3(face.changeVol, face.changeVol,0f);
+            speed += face.changeSpeed;
 
+            // play sounds when meet
             if (face.tag == "smile")
             {
                 AudioSource.PlayClipAtPoint(smile, transform.localPosition);
@@ -48,14 +63,22 @@ public class Cloud : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(sad, transform.localPosition);
             }
-            for (int i = 0; i < 2; i++)
 
+            // check if it needs more faces
+            int more = 2;
+            if (isRain == 1)
+                more = 4;
+
+            // place faces randomly
+            for (int i = 0; i < more; i++)
             {
-                Instantiate(face, new Vector3(Random.Range(face.transform.localScale.x-10, face.transform.localScale.x + 10), Random.Range(-6.4f, -5.7f), 0), Quaternion.identity);
-
+                Instantiate(face, new Vector3(Random.Range(face.transform.localPosition.x-3, face.transform.localPosition.x + 3), Random.Range(-4f, 0), 0), Quaternion.identity);
             }
+
+            // delet face if meet
             Destroy(face.gameObject);
            
         }
     }
+
 }

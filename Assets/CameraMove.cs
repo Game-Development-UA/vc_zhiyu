@@ -6,7 +6,7 @@ public class CameraMove : MonoBehaviour
 {
 
     public Transform cloud;
-    public float speed;
+    private float speed;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +15,12 @@ public class CameraMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Vector3 target = new Vector3(cloud.position.x, transform.position.y, -15f);
-        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
 
+        speed = cloud.GetComponent<Cloud>().speed;
+        transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime * speed);
     }
     
 }
