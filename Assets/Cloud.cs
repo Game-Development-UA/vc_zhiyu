@@ -26,7 +26,7 @@ public class Cloud : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             cloud.transform.localScale += new Vector3(-0.1f, -0.1f, 0f);
-            speed += 0.03f;
+            speed += 0.3f;
             isRain = 1;
         }
         else
@@ -67,12 +67,12 @@ public class Cloud : MonoBehaviour
             // check if it needs more faces
             int more = 2;
             if (isRain == 1)
-                more = 4;
+                more = 3;
 
             // place faces randomly
             for (int i = 0; i < more; i++)
             {
-                Instantiate(face, new Vector3(Random.Range(face.transform.localPosition.x-3, face.transform.localPosition.x + 3), Random.Range(-4f, 0), 0), Quaternion.identity);
+                Instantiate(face, new Vector3(Random.Range(face.transform.localPosition.x-5, face.transform.localPosition.x + 4), Random.Range(-5f, 2), 0), Quaternion.identity);
             }
 
             // delet face if meet
