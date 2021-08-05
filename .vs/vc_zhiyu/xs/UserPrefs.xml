@@ -1,10 +1,5 @@
 ﻿<Properties StartupConfiguration="{4BAA7480-EE90-E79F-9D7D-E172C294D67B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Cloud.cs">
-    <Files>
-      <File FileName="Assets/Cloud.cs" Line="50" Column="57" />
-      <File FileName="Assets/CameraMove.cs" Line="23" Column="43" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
